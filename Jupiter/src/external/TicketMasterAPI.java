@@ -23,6 +23,7 @@ public class TicketMasterAPI {
 	private static final String API_KEY = "x4K89koGXpflAgKzXuoN309FTwxtp3OP";
 	
 	public List<Item> search(double lat, double lon, String keyword) {
+		//return search result from ticketAPI
 		if (keyword == null) {
 			keyword = DEFAULT_KEYWORD;
 		}
@@ -34,10 +35,10 @@ public class TicketMasterAPI {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		String geoHash = GeoHash.encodeGeohash(lat, lon, 8);
 		// "apikey=qqPuP6n3ivMUoT9fPgLepkRMreBcbrjV&latlong=37,-120&keyword=event&radius=50"
 
-		String query = String.format("apikey=%s&latlong=%s,%s&keyword=%s&radius=%s", API_KEY, lat, lon, keyword, 50);
+		String query = String.format("apikey=%s&geoPoint=%s&keyword=%s&radius=%s", API_KEY, geoHash, keyword, 50);
 		String url = URL + "?" + query;
 		
 		try {

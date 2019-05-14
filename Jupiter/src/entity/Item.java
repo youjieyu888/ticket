@@ -10,6 +10,7 @@ import external.TicketMasterAPI;
 
 public class Item {
 	
+
 	private String itemId;
 	private String name;
 	private double rating;
@@ -18,6 +19,46 @@ public class Item {
 	private String imageUrl;
 	private String url;
 	private double distance;
+	
+	public String getItemId() {
+		return itemId;
+	}
+
+
+	public String getName() {
+		return name;
+	}
+
+
+	public double getRating() {
+		return rating;
+	}
+
+
+	public String getAddress() {
+		return address;
+	}
+
+
+	public Set<String> getCategories() {
+		return categories;
+	}
+
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+
+	public String getUrl() {
+		return url;
+	}
+
+
+	public double getDistance() {
+		return distance;
+	}
+
 	
 	public static class ItemBuilder {
 		private String itemId;
