@@ -1,12 +1,19 @@
 package rpc;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.json.JSONArray;
+
+import entity.Item;
+import recommendation.GeoRecommendation;
 
 /**
  * Servlet implementation class RecommendationItem
@@ -34,8 +41,19 @@ public class RecommendationItem extends HttpServlet {
 			return;
 		}
 		
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String userId = session.getAttribute("user_id").toString();
+		// String userId = request.getParameter("user_id");
+
+		double lat = Double.parseDouble(request.getParameter("lat"));
+		double lon = Double.parseDouble(request.getParameter("lon"));
+
+		GeoRecommendation recommendation = new GeoRecommendation();
+		List<Item> items = recommendation.recommendItems(userId, lat, lon);
+		JSONArray array = new JSONArray();
+		for (Item item : items) {
+			array.put(item.toJSONObject());
+		}
+		RpcHelper.writeJsonArray(response, array);	
 	}
 
 	/**

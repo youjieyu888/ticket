@@ -30,7 +30,7 @@ public class RpcHelper {
 	}
 
 	public static JSONObject readJSONObject(HttpServletRequest request) {
-		// parse request
+		// parse request to string
 		StringBuilder sb = new StringBuilder();
 		try (BufferedReader reader = request.getReader()) {
 			String line = null;
